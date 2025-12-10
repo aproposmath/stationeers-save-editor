@@ -180,7 +180,8 @@
       const micropip = pyodide.pyimport('micropip');
       await micropip.install('xsdata');
       await micropip.install('orjson');
-      let response = await fetch('https://cdn.jsdelivr.net/gh/aproposmath/stationeers-save-editor@builds/stationeers_save_editor.zip');
+      // let response = await fetch('https://cdn.jsdelivr.net/gh/aproposmath/stationeers-save-editor@builds/stationeers_save_editor.zip');
+      let response = await fetch('https://cdn.jsdelivr.net/gh/aproposmath/stationeers-save-editor@builds/v1.zip');
       // let response = await fetch('http://localhost:8000/stationeers_save_editor.zip');
       let buffer = await response.arrayBuffer();
       await pyodide.unpackArchive(buffer, "zip");
