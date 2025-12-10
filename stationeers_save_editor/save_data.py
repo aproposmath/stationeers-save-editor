@@ -5,6 +5,7 @@ from pathlib import Path
 from xsdata.formats.dataclass.serializers import XmlSerializer
 from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
+from xsdata.formats.dataclass.config import ParserConfig
 import re
 import orjson
 from html import escape
@@ -26,16 +27,18 @@ class SaveData:
         self.by_id = {}
         self.filename = filename
         self.humans = []
+        parser_config = ParserConfig(fail_on_unknown_properties=False)
+
         if filename.endswith(".save"):
             import zipfile
 
             with zipfile.ZipFile(filename, "r") as z:
                 with z.open("world.xml") as f:
                     data = f.read()
-            parser = XmlParser()
+            parser = XmlParser(config=parser_config)
             self.data = parser.from_string(data.decode("utf-8"), WorldData)
         elif filename.endswith(".xml"):
-            parser = XmlParser()
+            parser = XmlParser(config=parser_config)
             self.data = parser.parse(filename, WorldData)
         else:
             raise ValueError("Unsupported file type: " + filename)
