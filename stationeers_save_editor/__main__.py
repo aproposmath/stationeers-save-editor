@@ -20,7 +20,8 @@ def load_file(filename: Path) -> SaveData:
         validate_filename(filename)
         data = SaveData(str(filename))
         return data
-    except:
+    except Exception as e:
+        print("Error loading file:", e)
         raise typer.Exit(code=1)
 
 

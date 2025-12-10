@@ -5,7 +5,7 @@ from pathlib import Path
 from xsdata.formats.dataclass.serializers import XmlSerializer
 from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
-from xsdata.formats.dataclass.config import ParserConfig
+from xsdata.formats.dataclass.parsers import config 
 import re
 import orjson
 from html import escape
@@ -27,7 +27,8 @@ class SaveData:
         self.by_id = {}
         self.filename = filename
         self.humans = []
-        parser_config = ParserConfig(fail_on_unknown_properties=False)
+
+        parser_config = config.ParserConfig(fail_on_unknown_properties=False)
 
         if filename.endswith(".save"):
             import zipfile
