@@ -79,6 +79,59 @@
     button:hover {
       background-color: #0056b3;
     }
+
+
+    /* Collapsible block styling */
+    details.chip-block {
+      margin: 1em 0;
+      padding: .5em;
+      border: 1px solid #999;
+      border-radius: 6px;
+      background: #f9f9f9;
+    }
+
+    details.chip-block summary {
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    pre {
+      padding: 1em;
+    }
+
+    pre,
+    code {
+      font-family: "Fira Code", "Consolas", monospace;
+      font-size: 14px;
+      background: #272822;
+      color: #f8f8f2;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    /* Copy button */
+    .code-wrapper {
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: #444;
+      color: #fff;
+      padding: 4px 8px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      opacity: .7;
+    }
+
+    .copy-btn:hover {
+      opacity: 1;
+    }
   </style>
 
 <body>
@@ -128,6 +181,7 @@
       await micropip.install('xsdata');
       await micropip.install('orjson');
       let response = await fetch('https://cdn.jsdelivr.net/gh/aproposmath/stationeers-save-editor@builds/stationeers_save_editor.zip');
+      // let response = await fetch('http://localhost:8000/stationeers_save_editor.zip');
       let buffer = await response.arrayBuffer();
       await pyodide.unpackArchive(buffer, "zip");
       // pyodide.runPython("import shutil; shutil.move('stationeers-save-editor-dev/stationeers_save_editor', 'stationeers_save_editor')");

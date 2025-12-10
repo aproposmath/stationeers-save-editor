@@ -6,8 +6,9 @@ from xsdata.formats.dataclass.serializers import XmlSerializer
 from xsdata.formats.dataclass.serializers.config import SerializerConfig
 from xsdata.formats.dataclass.parsers import XmlParser
 import re
-from html import escape
 import orjson
+from html import escape
+import base64
 
 
 from .schema import *
@@ -16,6 +17,7 @@ class SaveData:
     children: dict[int, ReferencableSaveData] = {}
     by_id: dict[int, ReferencableSaveData] = {}
     humans: list[HumanSaveData] = []
+    ic_chips: list[ProgrammableChipSaveData] = []
     filename: str
 
     def __init__(self, filename: str):
@@ -44,6 +46,8 @@ class SaveData:
             if isinstance(obj, HumanSaveData):
                 # print("Found human:", obj)
                 self.humans.append(obj)
+            if isinstance(obj, ProgrammableChipSaveData):
+                self.ic_chips.append(obj)
             if hasattr(obj, "reference_id"):
                 self.by_id[obj.reference_id] = obj
             if hasattr(obj, "parent_reference_id"):
@@ -142,11 +146,12 @@ class SaveData:
 
     def get_info_json(self):
         data = {}
-        data["info_html"] = self.print_info_html()
+        data["info_html"] = self.print_info_html() + self.get_ic10_codes()
         icons = []
 
         data['humans'] = [dataclasses.asdict(h) for h in self.humans]
         data['data'] = dataclasses.asdict(self.data)
+
 
         for human in self.humans:
             p = human.world_position
@@ -265,3 +270,23 @@ class SaveData:
             state.stun = 0
             state.decay = 0
 
+
+
+    def get_ic10_codes(self):
+        codes = {chip.reference_id: chip.source_code for chip in self.ic_chips}
+
+        html = '<h1>IC-10 Chip Codes</h1>\n'
+
+
+        for chip_id, code in codes.items():
+            code_b64 = base64.b64encode(code.encode('utf-8')).decode('utf-8')
+            html += f'''
+            <details class="chip-block">
+                <summary>Chip ID: {chip_id}</summary>
+                <div class="code-wrapper">
+                    <button class="copy-btn" onclick="navigator.clipboard.writeText(window.atob('{code_b64}'))">Copy</button>
+                    <pre><code>{escape(code)}</code></pre>
+                </div>
+            </details>
+            '''
+        return html
