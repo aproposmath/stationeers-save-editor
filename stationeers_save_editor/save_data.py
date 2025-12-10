@@ -13,6 +13,7 @@ import base64
 
 from .schema import *
 
+
 class SaveData:
     children: dict[int, ReferencableSaveData] = {}
     by_id: dict[int, ReferencableSaveData] = {}
@@ -149,9 +150,8 @@ class SaveData:
         data["info_html"] = self.print_info_html() + self.get_ic10_codes()
         icons = []
 
-        data['humans'] = [dataclasses.asdict(h) for h in self.humans]
-        data['data'] = dataclasses.asdict(self.data)
-
+        data["humans"] = [dataclasses.asdict(h) for h in self.humans]
+        data["data"] = dataclasses.asdict(self.data)
 
         for human in self.humans:
             p = human.world_position
@@ -167,7 +167,7 @@ class SaveData:
                 name = obj.prefab_name.strip()
                 if name.startswith("Structure"):
                     name = name[len("Structure") :]
-                if name == 'Autolathe':
+                if name == "Autolathe":
                     p = obj.world_position
                     icons.append(
                         {
@@ -175,10 +175,9 @@ class SaveData:
                             "position": [p.x, p.y, p.z],
                         }
                     )
-        data['icons'] = icons
-        data['planet'] = self.data.world_setting.id.replace("2", "").lower()
+        data["icons"] = icons
+        data["planet"] = self.data.world_setting.id.replace("2", "").replace("3", "").lower()
         return orjson.dumps(data)
-
 
     def print_info_html(self):
         structures_rows = ""
@@ -186,7 +185,7 @@ class SaveData:
             if isinstance(obj, SimpleFabricatorSaveData):
                 name = obj.prefab_name
                 if name.startswith("Structure"):
-                    name = name[len("Structure"):]
+                    name = name[len("Structure") :]
                 pos = obj.world_position
                 pos_str = f"({pos.x:5.1f}, {pos.y:5.1f}, {pos.z:5.1f})"
                 structures_rows += f"""
@@ -245,9 +244,9 @@ class SaveData:
         human = self.humans[0]
 
         p = human.world_position
-        dx = x-p.x
-        dy = y-p.y
-        dz = z-p.z
+        dx = x - p.x
+        dy = y - p.y
+        dz = z - p.z
 
         def move_obj(obj):
             if hasattr(obj, "world_position"):
@@ -259,7 +258,7 @@ class SaveData:
 
     def heal_players(self):
         for human in self.humans:
-            state : DamageUpdate = human.damage_state
+            state: DamageUpdate = human.damage_state
             state.brute = 0
             state.burn = 0
             state.oxygen = 0
@@ -270,17 +269,14 @@ class SaveData:
             state.stun = 0
             state.decay = 0
 
-
-
     def get_ic10_codes(self):
         codes = {chip.reference_id: chip.source_code for chip in self.ic_chips}
 
-        html = '<h1>IC-10 Chip Codes</h1>\n'
-
+        html = "<h1>IC-10 Chip Codes</h1>\n"
 
         for chip_id, code in codes.items():
-            code_b64 = base64.b64encode(code.encode('utf-8')).decode('utf-8')
-            html += f'''
+            code_b64 = base64.b64encode(code.encode("utf-8")).decode("utf-8")
+            html += f"""
             <details class="chip-block">
                 <summary>Chip ID: {chip_id}</summary>
                 <div class="code-wrapper">
@@ -288,5 +284,5 @@ class SaveData:
                     <pre><code>{escape(code)}</code></pre>
                 </div>
             </details>
-            '''
+            """
         return html

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional
@@ -27,7 +29,7 @@ class ActionData:
     pass
 
 
-class ArmState(str,Enum):
+class ArmState(Enum):
     UNDEFINED = "Undefined"
     UP = "Up"
     DOWN = "Down"
@@ -116,6 +118,17 @@ class ArrayOfString2:
 
 @dataclass
 class ArrayOfString3:
+    string: list[str] = field(
+        default_factory=list,
+        metadata={
+            "type": "Element",
+            "nillable": True,
+        },
+    )
+
+
+@dataclass
+class ArrayOfString4:
     path: list[str] = field(
         default_factory=list,
         metadata={
@@ -127,22 +140,11 @@ class ArrayOfString3:
 
 
 @dataclass
-class ArrayOfString4:
+class ArrayOfString5:
     setting_name: list[str] = field(
         default_factory=list,
         metadata={
             "name": "SettingName",
-            "type": "Element",
-            "nillable": True,
-        },
-    )
-
-
-@dataclass
-class ArrayOfString5:
-    string: list[str] = field(
-        default_factory=list,
-        metadata={
             "type": "Element",
             "nillable": True,
         },
@@ -161,29 +163,7 @@ class ArrayOfString6:
     )
 
 
-@dataclass
-class ArrayOfUnsignedLong:
-    unsigned_long: list[int] = field(
-        default_factory=list,
-        metadata={
-            "name": "unsignedLong",
-            "type": "Element",
-        },
-    )
-
-
-@dataclass
-class ArrayOfUnsignedLong1:
-    id: list[int] = field(
-        default_factory=list,
-        metadata={
-            "name": "Id",
-            "type": "Element",
-        },
-    )
-
-
-class AudioSpeakerMode(str,Enum):
+class AudioSpeakerMode(Enum):
     MONO = "Mono"
     STEREO = "Stereo"
     QUAD = "Quad"
@@ -193,7 +173,7 @@ class AudioSpeakerMode(str,Enum):
     PROLOGIC = "Prologic"
 
 
-class BatteryCellState(str,Enum):
+class BatteryCellState(Enum):
     EMPTY = "Empty"
     CRITICAL = "Critical"
     LOW = "Low"
@@ -250,7 +230,7 @@ class ChanceData:
     )
 
 
-class Class(str,Enum):
+class Class(Enum):
     NONE = "None"
     HELMET = "Helmet"
     SUIT = "Suit"
@@ -317,38 +297,6 @@ class CloudShadowReference:
 
 
 @dataclass
-class Color:
-    r: Optional[float] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-            "required": True,
-        },
-    )
-    g: Optional[float] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-            "required": True,
-        },
-    )
-    b: Optional[float] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-            "required": True,
-        },
-    )
-    a: Optional[float] = field(
-        default=None,
-        metadata={
-            "type": "Element",
-            "required": True,
-        },
-    )
-
-
-@dataclass
 class ColorRgb:
     class Meta:
         name = "ColorRGB"
@@ -392,7 +340,42 @@ class ColorSwatchReference:
     )
 
 
-class CompareOperator(str,Enum):
+@dataclass
+class Color1:
+    class Meta:
+        name = "Color"
+
+    r: Optional[float] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+            "required": True,
+        },
+    )
+    g: Optional[float] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+            "required": True,
+        },
+    )
+    b: Optional[float] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+            "required": True,
+        },
+    )
+    a: Optional[float] = field(
+        default=None,
+        metadata={
+            "type": "Element",
+            "required": True,
+        },
+    )
+
+
+class CompareOperator(Enum):
     UNASSIGNED = "Unassigned"
     LESS = "Less"
     EQUAL_OR_LESS = "EqualOrLess"
@@ -403,224 +386,224 @@ class CompareOperator(str,Enum):
 
 @dataclass
 class ConditionData:
-    conditions: list["ConditionDataCollection"] = field(
+    conditions: list[ConditionDataCollection] = field(
         default_factory=list,
         metadata={
             "name": "Conditions",
             "type": "Element",
         },
     )
-    room: list["RoomCondition"] = field(
+    room: list[RoomCondition] = field(
         default_factory=list,
         metadata={
             "name": "Room",
             "type": "Element",
         },
     )
-    network: list["NetworkCondition"] = field(
+    network: list[NetworkCondition] = field(
         default_factory=list,
         metadata={
             "name": "Network",
             "type": "Element",
         },
     )
-    survival_property: list["SurvivalPropertyCondition"] = field(
+    survival_property: list[SurvivalPropertyCondition] = field(
         default_factory=list,
         metadata={
             "name": "SurvivalProperty",
             "type": "Element",
         },
     )
-    custom_name: list["CustomNameCondition"] = field(
+    custom_name: list[CustomNameCondition] = field(
         default_factory=list,
         metadata={
             "name": "CustomName",
             "type": "Element",
         },
     )
-    prefab: list["ThingPrefabCondition"] = field(
+    prefab: list[ThingPrefabCondition] = field(
         default_factory=list,
         metadata={
             "name": "Prefab",
             "type": "Element",
         },
     )
-    contact: list["TraderContactCondition"] = field(
+    contact: list[TraderContactCondition] = field(
         default_factory=list,
         metadata={
             "name": "Contact",
             "type": "Element",
         },
     )
-    size: list["SizeCondition"] = field(
+    size: list[SizeCondition] = field(
         default_factory=list,
         metadata={
             "name": "Size",
             "type": "Element",
         },
     )
-    temperature: list["TemperatureComparableCondition"] = field(
+    temperature: list[TemperatureComparableCondition] = field(
         default_factory=list,
         metadata={
             "name": "Temperature",
             "type": "Element",
         },
     )
-    growth_state: list["GrowthStateCondition"] = field(
+    growth_state: list[GrowthStateCondition] = field(
         default_factory=list,
         metadata={
             "name": "GrowthState",
             "type": "Element",
         },
     )
-    plant_status: list["PlantStatusCondition"] = field(
+    plant_status: list[PlantStatusCondition] = field(
         default_factory=list,
         metadata={
             "name": "PlantStatus",
             "type": "Element",
         },
     )
-    plant_record: list["PlantRecordCondition"] = field(
+    plant_record: list[PlantRecordCondition] = field(
         default_factory=list,
         metadata={
             "name": "PlantRecord",
             "type": "Element",
         },
     )
-    logic_type: list["LogicCondition"] = field(
+    logic_type: list[LogicCondition] = field(
         default_factory=list,
         metadata={
             "name": "LogicType",
             "type": "Element",
         },
     )
-    reagents: list["ReagentCondition"] = field(
+    reagents: list[ReagentCondition] = field(
         default_factory=list,
         metadata={
             "name": "Reagents",
             "type": "Element",
         },
     )
-    build_state: list["BuildStateCondition"] = field(
+    build_state: list[BuildStateCondition] = field(
         default_factory=list,
         metadata={
             "name": "BuildState",
             "type": "Element",
         },
     )
-    interactable: list["InteractableCondition"] = field(
+    interactable: list[InteractableCondition] = field(
         default_factory=list,
         metadata={
             "name": "Interactable",
             "type": "Element",
         },
     )
-    quantity: list["Quantity"] = field(
+    quantity: list[Quantity] = field(
         default_factory=list,
         metadata={
             "name": "Quantity",
             "type": "Element",
         },
     )
-    decay: list["Decay"] = field(
+    decay: list[Decay] = field(
         default_factory=list,
         metadata={
             "name": "Decay",
             "type": "Element",
         },
     )
-    gas: list["GasCondition"] = field(
+    gas: list[GasCondition] = field(
         default_factory=list,
         metadata={
             "name": "Gas",
             "type": "Element",
         },
     )
-    pressure: list["PressureCondition"] = field(
+    pressure: list[PressureCondition] = field(
         default_factory=list,
         metadata={
             "name": "Pressure",
             "type": "Element",
         },
     )
-    temperature_range: list["TemperatureRangeCondition"] = field(
+    temperature_range: list[TemperatureRangeCondition] = field(
         default_factory=list,
         metadata={
             "name": "TemperatureRange",
             "type": "Element",
         },
     )
-    percent: list["Percent"] = field(
+    percent: list[Percent] = field(
         default_factory=list,
         metadata={
             "name": "Percent",
             "type": "Element",
         },
     )
-    item: list["Item"] = field(
+    item: list[Item] = field(
         default_factory=list,
         metadata={
             "name": "Item",
             "type": "Element",
         },
     )
-    moles: list["Moles"] = field(
+    moles: list[Moles] = field(
         default_factory=list,
         metadata={
             "name": "Moles",
             "type": "Element",
         },
     )
-    charge: list["Energy"] = field(
+    charge: list[Energy] = field(
         default_factory=list,
         metadata={
             "name": "Charge",
             "type": "Element",
         },
     )
-    difficulty: list["Difficulty"] = field(
+    difficulty: list[Difficulty] = field(
         default_factory=list,
         metadata={
             "name": "Difficulty",
             "type": "Element",
         },
     )
-    species: list["Species"] = field(
+    species: list[Species] = field(
         default_factory=list,
         metadata={
             "name": "Species",
             "type": "Element",
         },
     )
-    pre_spawned: list["PreSpawnedCondition"] = field(
+    pre_spawned: list[PreSpawnedCondition] = field(
         default_factory=list,
         metadata={
             "name": "PreSpawned",
             "type": "Element",
         },
     )
-    in_cell: list["InCellCondition"] = field(
+    in_cell: list[InCellCondition] = field(
         default_factory=list,
         metadata={
             "name": "InCell",
             "type": "Element",
         },
     )
-    region: list["RegionCondition"] = field(
+    region: list[RegionCondition] = field(
         default_factory=list,
         metadata={
             "name": "Region",
             "type": "Element",
         },
     )
-    surface: list["SurfaceCondition"] = field(
+    surface: list[SurfaceCondition] = field(
         default_factory=list,
         metadata={
             "name": "Surface",
             "type": "Element",
         },
     )
-    depth: list["DepthCondition"] = field(
+    depth: list[DepthCondition] = field(
         default_factory=list,
         metadata={
             "name": "Depth",
@@ -637,7 +620,7 @@ class ConditionData:
     )
 
 
-class ConditionOperation(str,Enum):
+class ConditionOperation(Enum):
     EQUALS = "Equals"
     GREATER = "Greater"
     LESS = "Less"
@@ -680,13 +663,7 @@ class ContactSlotSaveData:
     )
 
 
-class ContactTier(str,Enum):
-    CLOSE = "Close"
-    MEDIUM = "Medium"
-    FAR = "Far"
-
-
-class Controller(str,Enum):
+class Controller(Enum):
     NONE = "None"
     JOYSTICK1 = "Joystick1"
     JOYSTICK2 = "Joystick2"
@@ -696,7 +673,7 @@ class Controller(str,Enum):
     JOYSTICK6 = "Joystick6"
 
 
-class ControllerAxis(str,Enum):
+class ControllerAxis(Enum):
     NONE = "None"
     AXIS1 = "Axis1"
     AXIS2 = "Axis2"
@@ -782,12 +759,12 @@ class DamageUpdate:
     )
 
 
-class DeleteSkeletonOnDecay(str,Enum):
+class DeleteSkeletonOnDecay(Enum):
     FALSE = "false"
     TRUE = "true"
 
 
-class DeployType(str,Enum):
+class DeployType(Enum):
     NONE = "None"
     NUCLEAR_BOMB = "NuclearBomb"
 
@@ -1046,7 +1023,7 @@ class DynamicThingData:
             "type": "Element",
         },
     )
-    contents: Optional["ArrayOfInventoryData"] = field(
+    contents: Optional[ArrayOfInventoryData] = field(
         default=None,
         metadata={
             "name": "Contents",
@@ -1101,14 +1078,14 @@ class EdgeData:
     )
 
 
-class EntityState(str,Enum):
+class EntityState(Enum):
     ALIVE = "Alive"
     DEAD = "Dead"
     UNCONSCIOUS = "Unconscious"
     DECAY = "Decay"
 
 
-class EntitySurvivalProperty(str,Enum):
+class EntitySurvivalProperty(Enum):
     NONE = "None"
     OXYGEN_QUALITY = "OxygenQuality"
     NUTRITION = "Nutrition"
@@ -1222,7 +1199,7 @@ class GasTradeData:
     )
 
 
-class GasTypeValue(str,Enum):
+class GasTypeValue(Enum):
     UNDEFINED = "Undefined"
     OXYGEN = "Oxygen"
     NITROGEN = "Nitrogen"
@@ -1245,13 +1222,41 @@ class GasTypeValue(str,Enum):
     FUEL = "Fuel"
 
 
-class Gender(str,Enum):
+class Gender(Enum):
     MALE = "Male"
     FEMALE = "Female"
     OTHER = "Other"
 
 
-class Gene(str,Enum):
+@dataclass
+class GeneWrapper:
+    gene: Optional[Gene] = field(
+        default=None,
+        metadata={
+            "name": "Gene",
+            "type": "Element",
+            "nillable": True,
+        },
+    )
+    value: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Value",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    stability: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Stability",
+            "type": "Element",
+            "required": True,
+        },
+    )
+
+
+class Gene1(Enum):
     NONE = "None"
     GROWTH_TIME_MULTIPLIER = "GrowthTimeMultiplier"
     DARK_PER_DAY = "DarkPerDay"
@@ -1297,7 +1302,7 @@ class GradientAlphaKey:
     )
 
 
-class GradientMode(str,Enum):
+class GradientMode(Enum):
     BLEND = "Blend"
     FIXED = "Fixed"
     PERCEPTUAL_BLEND = "PerceptualBlend"
@@ -1328,7 +1333,7 @@ class Grid3:
     )
 
 
-class HideFlagsValue(str,Enum):
+class HideFlagsValue(Enum):
     NONE = "None"
     HIDE_IN_HIERARCHY = "HideInHierarchy"
     HIDE_IN_INSPECTOR = "HideInInspector"
@@ -1454,7 +1459,7 @@ class InteractableState:
     )
 
 
-class InteractableType(str,Enum):
+class InteractableType(Enum):
     OPEN = "Open"
     SLOT1 = "Slot1"
     SLOT2 = "Slot2"
@@ -1593,9 +1598,10 @@ class InteractableType(str,Enum):
     BUTTON15 = "Button15"
     BUTTON16 = "Button16"
     BUTTON17 = "Button17"
+    IMPORT2 = "Import2"
 
 
-class KeyCode(str,Enum):
+class KeyCode(Enum):
     NONE = "None"
     BACKSPACE = "Backspace"
     DELETE = "Delete"
@@ -1926,7 +1932,7 @@ class KeyCode(str,Enum):
     JOYSTICK8_BUTTON19 = "Joystick8Button19"
 
 
-class LanguageCode(str,Enum):
+class LanguageCode(Enum):
     N = "N"
     AA = "AA"
     AB = "AB"
@@ -2136,20 +2142,20 @@ class LanguageCode(str,Enum):
     PB = "PB"
 
 
-class LogicBatchMethod(str,Enum):
+class LogicBatchMethod(Enum):
     AVERAGE = "Average"
     SUM = "Sum"
     MINIMUM = "Minimum"
     MAXIMUM = "Maximum"
 
 
-class LogicOperator(str,Enum):
+class LogicOperator(Enum):
     ALL = "All"
     ANY = "Any"
     NONE = "None"
 
 
-class LogicType(str,Enum):
+class LogicType(Enum):
     NONE = "None"
     POWER = "Power"
     OPEN = "Open"
@@ -2430,9 +2436,10 @@ class LogicType(str,Enum):
     SETPOINT = "Setpoint"
     RESET = "Reset"
     STACK_SIZE = "StackSize"
+    NEXT_WEATHER_HASH = "NextWeatherHash"
 
 
-class MachineTier(str,Enum):
+class MachineTier(Enum):
     UNDEFINED = "Undefined"
     TIER_ONE = "TierOne"
     TIER_TWO = "TierTwo"
@@ -2496,7 +2503,7 @@ class MessageBaseOfSpawnGas:
     pass
 
 
-class MinableType(str,Enum):
+class MinableType(Enum):
     NONE = "None"
     STONE = "Stone"
     IRON = "Iron"
@@ -2563,7 +2570,7 @@ class MineableDepositSaveData:
     )
 
 
-class MixRule(str,Enum):
+class MixRule(Enum):
     NONE = "None"
     PURE = "Pure"
 
@@ -2690,19 +2697,63 @@ class NodeIcon:
     )
 
 
-class OcclusionDownscale(str,Enum):
+@dataclass
+class NoiseLayerData:
+    emissive: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Emissive",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    threshold: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Threshold",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    power: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Power",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    multiplier: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Multiplier",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    mask_multiplier: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "MaskMultiplier",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+
+
+class OcclusionDownscale(Enum):
     X1 = "x1"
     X2 = "x2"
     X4 = "x4"
 
 
-class OcclusionSamples(str,Enum):
+class OcclusionSamples(Enum):
     X64 = "x64"
     X164 = "x164"
     X244 = "x244"
 
 
-class OcclusionType(str,Enum):
+class OcclusionType(Enum):
     LOS = "LOS"
     ROOM = "Room"
     NONE = "None"
@@ -2780,7 +2831,7 @@ class PerennialData:
     )
 
 
-class PipeBurstValue(str,Enum):
+class PipeBurstValue(Enum):
     NONE = "None"
     FALSE = "false"
     PRESSURE = "Pressure"
@@ -2909,7 +2960,7 @@ class PlantStatData:
     )
 
 
-class PlantStatusType(str,Enum):
+class PlantStatusType(Enum):
     DEHYDRATED = "Dehydrated"
     LIT = "Lit"
     DARKNESS = "Darkness"
@@ -2923,7 +2974,7 @@ class PlantStatusType(str,Enum):
     HIGH_WATER_TEMPERATURE = "HighWaterTemperature"
 
 
-class PlayableAreaRule(str,Enum):
+class PlayableAreaRule(Enum):
     NONE = "None"
     VALID = "Valid"
     WARNING = "Warning"
@@ -3081,7 +3132,43 @@ class RandomPoolData:
     )
 
 
-class ReEntryProfile(str,Enum):
+@dataclass
+class RayMarchData:
+    steps: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "Steps",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    size: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Size",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    growth: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Growth",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    density: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Density",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+
+
+class ReEntryProfile(Enum):
     NONE = "None"
     OPTIMAL = "Optimal"
     MEDIUM = "Medium"
@@ -3602,7 +3689,7 @@ class RequirementWrapper:
     )
 
 
-class ResearchPodType(str,Enum):
+class ResearchPodType(Enum):
     UNDEFINED = "Undefined"
     RED = "Red"
     GREEN = "Green"
@@ -3611,7 +3698,7 @@ class ResearchPodType(str,Enum):
     MAX = "Max"
 
 
-class ResearchSort(str,Enum):
+class ResearchSort(Enum):
     UNDEFINED = "Undefined"
     MILITARY = "Military"
     PRODUCTION = "Production"
@@ -3624,7 +3711,7 @@ class ResearchSort(str,Enum):
     MAX = "Max"
 
 
-class ReverbType(str,Enum):
+class ReverbType(Enum):
     FLAT = "Flat"
     SPATIAL = "Spatial"
     NONE = "None"
@@ -3644,7 +3731,7 @@ class RingReference:
     )
 
 
-class RocketMode(str,Enum):
+class RocketMode(Enum):
     INVALID = "Invalid"
     NONE = "None"
     MINE = "Mine"
@@ -3665,7 +3752,7 @@ class RocketName:
     )
 
 
-class RocketState(str,Enum):
+class RocketState(Enum):
     NONE = "None"
     ON_LAUNCH_MOUNT = "OnLaunchMount"
     LAUNCHING = "Launching"
@@ -3678,7 +3765,7 @@ class RoomRuleConditionData:
     pass
 
 
-class RoomType(str,Enum):
+class RoomType(Enum):
     UNDEFINED = "Undefined"
     DEFAULT = "Default"
     MANUFACTURING = "Manufacturing"
@@ -3687,7 +3774,7 @@ class RoomType(str,Enum):
     HYDROPONICS = "Hydroponics"
 
 
-class SpdaentryType(str,Enum):
+class SpdaentryType(Enum):
     UNDEFINED = "Undefined"
     GUIDES = "Guides"
     LORE = "Lore"
@@ -3771,6 +3858,34 @@ class SeekData:
 
 
 @dataclass
+class SerializedClientInfo:
+    client_id: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "ClientId",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    start_location_hash: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "StartLocationHash",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    spawn_point_reference: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "SpawnPointReference",
+            "type": "Element",
+            "required": True,
+        },
+    )
+
+
+@dataclass
 class SerializedId:
     id: Optional[str] = field(
         default=None,
@@ -3804,7 +3919,7 @@ class SettingBase:
     )
 
 
-class ShuttleType(str,Enum):
+class ShuttleType(Enum):
     NONE = "None"
     SMALL = "Small"
     SMALL_GAS = "SmallGas"
@@ -3814,6 +3929,11 @@ class ShuttleType(str,Enum):
     LARGE_GAS = "LargeGas"
     MEDIUM_PLANE = "MediumPlane"
     LARGE_PLANE = "LargePlane"
+
+
+class ShuttleVariant(Enum):
+    NONE = "None"
+    GAS = "Gas"
 
 
 @dataclass
@@ -3828,7 +3948,29 @@ class SlotCondition:
     )
 
 
-class SpatialReference(str,Enum):
+@dataclass
+class SlotIcon:
+    path: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Path",
+            "type": "Attribute",
+        },
+    )
+
+
+@dataclass
+class SlotIdReference:
+    value: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Value",
+            "type": "Attribute",
+        },
+    )
+
+
+class SpatialReference(Enum):
     VALUE_2_D = "2D"
     VALUE_3_D = "3D"
     SMALL = "Small"
@@ -3890,22 +4032,23 @@ class SpatialSoundData:
     )
 
 
-class SpawnEvent(str,Enum):
+class SpawnEvent(Enum):
     NONE = "None"
     NEW_WORLD = "NewWorld"
     NEW_PLAYER_KIT = "NewPlayerKit"
     RESPAWN_PLAYER_KIT = "RespawnPlayerKit"
     NEW_PLAYER = "NewPlayer"
+    RESPAWN_PLAYER = "RespawnPlayer"
 
 
-class SpawnPositionRule(str,Enum):
+class SpawnPositionRule(Enum):
     NONE = "None"
     RANDOM = "Random"
     RADIAL = "Radial"
     EXPLICIT = "Explicit"
 
 
-class SpeciesClass(str,Enum):
+class SpeciesClass(Enum):
     NONE = "None"
     HUMAN = "Human"
     ZRILIAN = "Zrilian"
@@ -4055,16 +4198,6 @@ class StationSuitProperties:
     pass
 
 
-class StormDirection(str,Enum):
-    NONE = "None"
-    NORTH = "North"
-    EAST = "East"
-    SOUTH = "South"
-    WEST = "West"
-    DOWN = "Down"
-    UP = "Up"
-
-
 @dataclass
 class StringReference:
     value: Optional[str] = field(
@@ -4076,7 +4209,7 @@ class StringReference:
     )
 
 
-class StructureNetworkType(str,Enum):
+class StructureNetworkType(Enum):
     NONE = "None"
     LANDING_PAD = "LandingPad"
     PIPE = "Pipe"
@@ -4112,12 +4245,12 @@ class TemperatureKelvin:
     pass
 
 
-class TemperatureType(str,Enum):
+class TemperatureType(Enum):
     KELVIN = "Kelvin"
     CELSIUS = "Celsius"
 
 
-class TextureFormat(str,Enum):
+class TextureFormat(Enum):
     ALPHA8 = "Alpha8"
     ARGB4444 = "ARGB4444"
     RGB24 = "RGB24"
@@ -4176,7 +4309,7 @@ class TextureFormat(str,Enum):
     RGBA64 = "RGBA64"
 
 
-class TextureLoadType(str,Enum):
+class TextureLoadType(Enum):
     NONE = "None"
     PRELOAD = "Preload"
     ON_REQUEST = "OnRequest"
@@ -4482,7 +4615,7 @@ class Vector3:
     )
 
 
-class VentDirection(str,Enum):
+class VentDirection(Enum):
     INWARD = "Inward"
     OUTWARD = "Outward"
 
@@ -4570,7 +4703,7 @@ class WeatherManagerSavedData:
     )
 
 
-class WeightedMode(str,Enum):
+class WeightedMode(Enum):
     NONE = "None"
     IN = "In"
     OUT = "Out"
@@ -4964,6 +5097,18 @@ class ArrayOfGasTradeData:
         default_factory=list,
         metadata={
             "name": "GasTradeData",
+            "type": "Element",
+            "nillable": True,
+        },
+    )
+
+
+@dataclass
+class ArrayOfGeneWrapper:
+    gene_wrapper: list[GeneWrapper] = field(
+        default_factory=list,
+        metadata={
+            "name": "GeneWrapper",
             "type": "Element",
             "nillable": True,
         },
@@ -5509,6 +5654,12 @@ class CelestialBodySaveData(CelestialSaveData):
 
 
 @dataclass
+class Chance(ChanceData):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class ChannelData:
     name: Optional[str] = field(
         default=None,
@@ -5628,6 +5779,12 @@ class ChargeAction(ActionData):
             "required": True,
         },
     )
+
+
+@dataclass
+class Color(ColorRgb):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -5822,18 +5979,6 @@ class EnumReferenceOfEntityState:
 
 
 @dataclass
-class EnumReferenceOfStormDirection:
-    value: Optional[StormDirection] = field(
-        default=None,
-        metadata={
-            "name": "Value",
-            "type": "Attribute",
-            "required": True,
-        },
-    )
-
-
-@dataclass
 class Environment(SlotCondition):
     type_value: Optional[SpeciesClass] = field(
         default=None,
@@ -6000,14 +6145,14 @@ class GameAudioClipsData:
             "required": True,
         },
     )
-    clip_names: Optional[ArrayOfString3] = field(
+    clip_names: Optional[ArrayOfString4] = field(
         default=None,
         metadata={
             "name": "ClipNames",
             "type": "Element",
         },
     )
-    concurrency_settings: Optional[ArrayOfString4] = field(
+    concurrency_settings: Optional[ArrayOfString5] = field(
         default=None,
         metadata={
             "name": "ConcurrencySettings",
@@ -6109,8 +6254,14 @@ class GasQuantityData:
 
 
 @dataclass
+class Gene(GeneWrapper):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class GeneAction(ActionData):
-    id: Optional[Gene] = field(
+    id: Optional[Gene1] = field(
         default=None,
         metadata={
             "name": "Id",
@@ -6123,34 +6274,6 @@ class GeneAction(ActionData):
         metadata={
             "name": "Value",
             "type": "Attribute",
-            "required": True,
-        },
-    )
-
-
-@dataclass
-class GeneWrapper:
-    gene: Optional[Gene] = field(
-        default=None,
-        metadata={
-            "name": "Gene",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    value: Optional[float] = field(
-        default=None,
-        metadata={
-            "name": "Value",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    stability: Optional[float] = field(
-        default=None,
-        metadata={
-            "name": "Stability",
-            "type": "Element",
             "required": True,
         },
     )
@@ -6326,7 +6449,7 @@ class GlobalTemperatureFloatOffset(GlobalTemperatureOffsetData):
 
 @dataclass
 class GradientColorKey:
-    color: Optional[Color] = field(
+    color: Optional[Color1] = field(
         default=None,
         metadata={
             "type": "Element",
@@ -6344,7 +6467,7 @@ class GradientColorKey:
 
 @dataclass
 class GradientColorKeyData:
-    color: Optional[Color] = field(
+    color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "Color",
@@ -6528,7 +6651,7 @@ class KitMetaData(MessageBaseOfKitMetaData):
             "type": "Element",
         },
     )
-    hair_colours: Optional[ArrayOfString5] = field(
+    hair_colours: Optional[ArrayOfString3] = field(
         default=None,
         metadata={
             "name": "HairColours",
@@ -6717,6 +6840,12 @@ class MapNodeReference(SerializedReferenceId):
             "type": "Element",
         },
     )
+
+
+@dataclass
+class Material(MaterialReference):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -7016,6 +7145,12 @@ class Object:
 
 
 @dataclass
+class Objective(WorldObjectiveSaveData):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class ObjectiveCompleteCondition(ConditionData):
     id: Optional[str] = field(
         default=None,
@@ -7063,7 +7198,14 @@ class PercentAction(ActionData):
 
 @dataclass
 class Plane(SlotCondition):
-    pass
+    type_value: Optional[ShuttleType] = field(
+        default=None,
+        metadata={
+            "name": "Type",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
 
 
 @dataclass
@@ -7165,6 +7307,12 @@ class PlantStatusCondition(ConditionData):
 
 
 @dataclass
+class PlayerCookie(PlayerCookieSaveDataV1):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class PreSpawnedCondition(ConditionData):
     value: Optional[bool] = field(
         default=None,
@@ -7226,6 +7374,18 @@ class Quaternion:
             "required": True,
         },
     )
+
+
+@dataclass
+class RandomPool(RandomPoolData):
+    class Meta:
+        nillable = True
+
+
+@dataclass
+class Range(ValueRange):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -7847,6 +8007,18 @@ class SetReagents(ActionData):
 
 
 @dataclass
+class Shuttle(SlotCondition):
+    type_value: Optional[ShuttleType] = field(
+        default=None,
+        metadata={
+            "name": "Type",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+
+
+@dataclass
 class SmallerThanConditionData(RoomRuleConditionData):
     size: Optional[int] = field(
         default=None,
@@ -7988,25 +8160,6 @@ class SpawnGas(MessageBaseOfSpawnGas):
 
 
 @dataclass
-class SpawnPointSaveData:
-    parent_ref_id: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "ParentRefId",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    steam_ids: Optional[ArrayOfUnsignedLong1] = field(
-        default=None,
-        metadata={
-            "name": "SteamIDs",
-            "type": "Element",
-        },
-    )
-
-
-@dataclass
 class SpawnPositionListData:
     transform: list[TransformData] = field(
         default_factory=list,
@@ -8042,6 +8195,12 @@ class Species(ConditionData):
             "required": True,
         },
     )
+
+
+@dataclass
+class Star(StarData):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -8195,6 +8354,12 @@ class ThingPrefabCondition(ConditionData):
             "type": "Attribute",
         },
     )
+
+
+@dataclass
+class TimeSpan(TimeSpanReference):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -8416,6 +8581,12 @@ class Alcohol(OrganicReagent):
 
 
 @dataclass
+class AmbientLighting(AmbientLightingReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class AnimationCurveData:
     key: list[AnimCurveKey] = field(
         default_factory=list,
@@ -8428,14 +8599,14 @@ class AnimationCurveData:
 
 @dataclass
 class AnyConditionData(RoomRuleConditionData):
-    any: list["AnyConditionData"] = field(
+    any: list[AnyConditionData] = field(
         default_factory=list,
         metadata={
             "name": "Any",
             "type": "Element",
         },
     )
-    all: list["AllConditionData"] = field(
+    all: list[AllConditionData] = field(
         default_factory=list,
         metadata={
             "name": "All",
@@ -8564,18 +8735,6 @@ class ArrayOfGameAudioClipsData:
         default_factory=list,
         metadata={
             "name": "Clip",
-            "type": "Element",
-            "nillable": True,
-        },
-    )
-
-
-@dataclass
-class ArrayOfGeneWrapper:
-    gene_wrapper: list[GeneWrapper] = field(
-        default_factory=list,
-        metadata={
-            "name": "GeneWrapper",
             "type": "Element",
             "nillable": True,
         },
@@ -8738,18 +8897,6 @@ class ArrayOfSpawnGas:
 
 
 @dataclass
-class ArrayOfSpawnPointSaveData:
-    spawn_point_save_data: list[SpawnPointSaveData] = field(
-        default_factory=list,
-        metadata={
-            "name": "SpawnPointSaveData",
-            "type": "Element",
-            "nillable": True,
-        },
-    )
-
-
-@dataclass
 class ArrayOfStateWrapper:
     state: list[StateWrapper] = field(
         default_factory=list,
@@ -8826,6 +8973,11 @@ class CelestialRotation(Vector3Reference):
 
 @dataclass
 class ChartData(SpaceMapNodeActionData):
+    pass
+
+
+@dataclass
+class Cheese(OrganicReagent):
     pass
 
 
@@ -8907,6 +9059,13 @@ class ConditionCollection:
             "type": "Element",
         },
     )
+    shuttle: list[Shuttle] = field(
+        default_factory=list,
+        metadata={
+            "name": "Shuttle",
+            "type": "Element",
+        },
+    )
     environment: list[Environment] = field(
         default_factory=list,
         metadata={
@@ -8937,6 +9096,12 @@ class Copper(OrganicReagent):
 @dataclass
 class Corn(OrganicReagent):
     pass
+
+
+@dataclass
+class CurrentState(BooleanStateWrapper):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -9169,6 +9334,48 @@ class DifficultySetting(SettingBase):
         default=None,
         metadata={
             "name": "Achievements",
+            "type": "Element",
+        },
+    )
+    respawn_stress_time: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "RespawnStressTime",
+            "type": "Element",
+        },
+    )
+    respawn_stress_consumption_speed: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "RespawnStressConsumptionSpeed",
+            "type": "Element",
+        },
+    )
+    respawn_stress_tool_use_speed: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "RespawnStressToolUseSpeed",
+            "type": "Element",
+        },
+    )
+    respawn_stress_trade_penalty: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "RespawnStressTradePenalty",
+            "type": "Element",
+        },
+    )
+    good_hygiene_tool_speed_multiplier: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "GoodHygieneToolSpeedMultiplier",
+            "type": "Element",
+        },
+    )
+    mood_tool_speed_multiplier: Optional[FloatReference] = field(
+        default=None,
+        metadata={
+            "name": "MoodToolSpeedMultiplier",
             "type": "Element",
         },
     )
@@ -9553,6 +9760,31 @@ class GasQuantityRatioData(GasQuantityData):
 
 
 @dataclass
+class GeneCollectionWrapper:
+    plant_custom_name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PlantCustomName",
+            "type": "Element",
+        },
+    )
+    planter_custom_name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PlanterCustomName",
+            "type": "Element",
+        },
+    )
+    gene_wrappers: Optional[ArrayOfGeneWrapper] = field(
+        default=None,
+        metadata={
+            "name": "GeneWrappers",
+            "type": "Element",
+        },
+    )
+
+
+@dataclass
 class GlobalGasMixData:
     gas: list[GlobalMoleData] = field(
         default_factory=list,
@@ -9654,7 +9886,14 @@ class Item(ThingPrefabCondition):
 
 @dataclass
 class LaunchPadNodeReference(MapNodeReference):
-    pass
+    is_orbital: Optional[bool] = field(
+        default=None,
+        metadata={
+            "name": "IsOrbital",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
 
 
 @dataclass
@@ -9751,6 +9990,12 @@ class Milk(OrganicReagent):
 
 
 @dataclass
+class ModMetadata(ModAbout):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class Moles(ConditionComparable):
     value: Optional[float] = field(
         default=None,
@@ -9775,6 +10020,12 @@ class Mushroom(OrganicReagent):
 @dataclass
 class Nickel(OrganicReagent):
     pass
+
+
+@dataclass
+class Node(MapNodeReference):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -9890,6 +10141,208 @@ class PlantRecordCondition(ConditionComparable):
         metadata={
             "name": "Value",
             "type": "Attribute",
+            "required": True,
+        },
+    )
+
+
+@dataclass
+class PlantSample:
+    plant_name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PlantName",
+            "type": "Element",
+        },
+    )
+    genes: Optional[ArrayOfGeneWrapper] = field(
+        default=None,
+        metadata={
+            "name": "Genes",
+            "type": "Element",
+        },
+    )
+    time_until_dehydration_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilDehydrationDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_undesired_gas_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilUndesiredGasDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_frozen_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilFrozenDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_over_heated_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilOverHeatedDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_suffocated_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilSuffocatedDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_low_pressure_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilLowPressureDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_high_pressure_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilHighPressureDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    light_per_day: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "LightPerDay",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    darkness_per_day: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "DarknessPerDay",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_light_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilLightDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    time_until_darkness_damage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "TimeUntilDarknessDamage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    water_usage: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "WaterUsage",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    gas_production: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "GasProduction",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    undesired_gas_resistance: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "UndesiredGasResistance",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    min_grow_temperature_c: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MinGrowTemperatureC",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    min_ideal_grow_temperature_c: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MinIdealGrowTemperatureC",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    max_grow_temperature_c: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MaxGrowTemperatureC",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    max_ideal_grow_temperature_c: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MaxIdealGrowTemperatureC",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    min_grow_pressure: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MinGrowPressure",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    min_ideal_grow_pressure: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MinIdealGrowPressure",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    max_grow_pressure: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MaxGrowPressure",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    max_ideal_grow_pressure: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "MaxIdealGrowPressure",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    growth_speed_multiplier: Optional[RequirementWrapper] = field(
+        default=None,
+        metadata={
+            "name": "GrowthSpeedMultiplier",
+            "type": "Element",
             "required": True,
         },
     )
@@ -10736,6 +11189,14 @@ class Recipe:
             "required": True,
         },
     )
+    cheese: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Cheese",
+            "type": "Element",
+            "required": True,
+        },
+    )
     time: Optional[float] = field(
         default=None,
         metadata={
@@ -10910,6 +11371,12 @@ class Sprite(Object):
 
 
 @dataclass
+class State(StateWrapper):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class Steel(OrganicReagent):
     pass
 
@@ -10917,6 +11384,75 @@ class Steel(OrganicReagent):
 @dataclass
 class Stellite(OrganicReagent):
     pass
+
+
+@dataclass
+class StormEffectData:
+    ray_march: Optional[RayMarchData] = field(
+        default=None,
+        metadata={
+            "name": "RayMarch",
+            "type": "Element",
+        },
+    )
+    layer1: Optional[NoiseLayerData] = field(
+        default=None,
+        metadata={
+            "name": "Layer1",
+            "type": "Element",
+        },
+    )
+    layer2: Optional[NoiseLayerData] = field(
+        default=None,
+        metadata={
+            "name": "Layer2",
+            "type": "Element",
+        },
+    )
+    layer3: Optional[NoiseLayerData] = field(
+        default=None,
+        metadata={
+            "name": "Layer3",
+            "type": "Element",
+        },
+    )
+    color1: Optional[Color32Reference] = field(
+        default=None,
+        metadata={
+            "name": "Color1",
+            "type": "Element",
+        },
+    )
+    color2: Optional[Color32Reference] = field(
+        default=None,
+        metadata={
+            "name": "Color2",
+            "type": "Element",
+        },
+    )
+    mask_color: Optional[Color32Reference] = field(
+        default=None,
+        metadata={
+            "name": "MaskColor",
+            "type": "Element",
+        },
+    )
+    speed: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Speed",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
+    size: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "Size",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
 
 
 @dataclass
@@ -11210,7 +11746,7 @@ class AllConditionData(RoomRuleConditionData):
             "type": "Element",
         },
     )
-    all: list["AllConditionData"] = field(
+    all: list[AllConditionData] = field(
         default_factory=list,
         metadata={
             "name": "All",
@@ -11239,6 +11775,18 @@ class ArrayOfDifficultySetting:
         default_factory=list,
         metadata={
             "name": "DifficultySetting",
+            "type": "Element",
+            "nillable": True,
+        },
+    )
+
+
+@dataclass
+class ArrayOfGeneCollectionWrapper:
+    gene_collections: list[GeneCollectionWrapper] = field(
+        default_factory=list,
+        metadata={
+            "name": "GeneCollections",
             "type": "Element",
             "nillable": True,
         },
@@ -11305,7 +11853,7 @@ class AtmosphericScatteringBlendData(DataCollection):
             "type": "Element",
         },
     )
-    height_rayleigh_color: Optional[Color] = field(
+    height_rayleigh_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "HeightRayleighColor",
@@ -11441,7 +11989,7 @@ class AtmosphericScatteringData:
             "required": True,
         },
     )
-    height_rayleigh_color: Optional[Color] = field(
+    height_rayleigh_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "HeightRayleighColor",
@@ -11672,6 +12220,12 @@ class BlueprintData(DataCollection):
 
 
 @dataclass
+class Celestial(CelestialReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class CelestialBodyTemplate(CelestialReference):
     orbit: Optional[OrbitData] = field(
         default=None,
@@ -11738,7 +12292,7 @@ class CompletedTutorialPopupAction(PopupAction):
 
 @dataclass
 class ConditionDataCollection:
-    conditions: list["ConditionDataCollection"] = field(
+    conditions: list[ConditionDataCollection] = field(
         default_factory=list,
         metadata={
             "name": "Conditions",
@@ -12119,26 +12673,33 @@ class GameAudioEvent:
 
 
 @dataclass
-class GeneCollectionWrapper:
-    plant_custom_name: Optional[str] = field(
+class GeneCollection(GeneCollectionWrapper):
+    class Meta:
+        nillable = True
+
+
+@dataclass
+class GlobalPlantSaveData:
+    prefab_id: Optional[str] = field(
         default=None,
         metadata={
-            "name": "PlantCustomName",
+            "name": "PrefabId",
             "type": "Element",
         },
     )
-    planter_custom_name: Optional[str] = field(
+    gene_collection_wrapper: Optional[GeneCollectionWrapper] = field(
         default=None,
         metadata={
-            "name": "PlanterCustomName",
+            "name": "GeneCollectionWrapper",
             "type": "Element",
         },
     )
-    gene_wrappers: Optional[ArrayOfGeneWrapper] = field(
+    count: Optional[int] = field(
         default=None,
         metadata={
-            "name": "GeneWrappers",
+            "name": "Count",
             "type": "Element",
+            "required": True,
         },
     )
 
@@ -12415,7 +12976,7 @@ class NormalMapReference(TextureReferenceWithValue):
 
 @dataclass
 class ObjectiveConditionCollection:
-    conditions: list["ObjectiveConditionCollection"] = field(
+    conditions: list[ObjectiveConditionCollection] = field(
         default_factory=list,
         metadata={
             "name": "Conditions",
@@ -12477,208 +13038,6 @@ class ObjectiveConditionCollection:
         metadata={
             "name": "Operator",
             "type": "Attribute",
-            "required": True,
-        },
-    )
-
-
-@dataclass
-class PlantSample:
-    plant_name: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "PlantName",
-            "type": "Element",
-        },
-    )
-    genes: Optional[ArrayOfGeneWrapper] = field(
-        default=None,
-        metadata={
-            "name": "Genes",
-            "type": "Element",
-        },
-    )
-    time_until_dehydration_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilDehydrationDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_undesired_gas_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilUndesiredGasDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_frozen_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilFrozenDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_over_heated_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilOverHeatedDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_suffocated_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilSuffocatedDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_low_pressure_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilLowPressureDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_high_pressure_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilHighPressureDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    light_per_day: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "LightPerDay",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    darkness_per_day: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "DarknessPerDay",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_light_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilLightDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    time_until_darkness_damage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "TimeUntilDarknessDamage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    water_usage: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "WaterUsage",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    gas_production: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "GasProduction",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    undesired_gas_resistance: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "UndesiredGasResistance",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    min_grow_temperature_c: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MinGrowTemperatureC",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    min_ideal_grow_temperature_c: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MinIdealGrowTemperatureC",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    max_grow_temperature_c: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MaxGrowTemperatureC",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    max_ideal_grow_temperature_c: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MaxIdealGrowTemperatureC",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    min_grow_pressure: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MinGrowPressure",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    min_ideal_grow_pressure: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MinIdealGrowPressure",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    max_grow_pressure: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MaxGrowPressure",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    max_ideal_grow_pressure: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "MaxIdealGrowPressure",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    growth_speed_multiplier: Optional[RequirementWrapper] = field(
-        default=None,
-        metadata={
-            "name": "GrowthSpeedMultiplier",
-            "type": "Element",
             "required": True,
         },
     )
@@ -13163,6 +13522,13 @@ class ReagentMixture:
             "type": "Element",
         },
     )
+    cheese: Optional[Cheese] = field(
+        default=None,
+        metadata={
+            "name": "Cheese",
+            "type": "Element",
+        },
+    )
 
 
 @dataclass
@@ -13433,7 +13799,7 @@ class SellItem(TradableItem):
             "type": "Element",
         },
     )
-    item: list["SellItem"] = field(
+    item: list[SellItem] = field(
         default_factory=list,
         metadata={
             "name": "Item",
@@ -14375,6 +14741,17 @@ class SiteNodeReference(TemplateNodeReference):
 
 
 @dataclass
+class SpaceMapSpriteData(DataCollection):
+    map_display: Optional[MapDisplayData] = field(
+        default=None,
+        metadata={
+            "name": "MapDisplay",
+            "type": "Element",
+        },
+    )
+
+
+@dataclass
 class SpawnData(DataCollection):
     species: list[Species] = field(
         default_factory=list,
@@ -14397,21 +14774,21 @@ class SpawnData(DataCollection):
             "type": "Element",
         },
     )
-    item: list["DynamicSpawnData"] = field(
+    item: list[DynamicSpawnData] = field(
         default_factory=list,
         metadata={
             "name": "Item",
             "type": "Element",
         },
     )
-    dynamic_thing: list["DynamicSpawnData"] = field(
+    dynamic_thing: list[DynamicSpawnData] = field(
         default_factory=list,
         metadata={
             "name": "DynamicThing",
             "type": "Element",
         },
     )
-    structure: list["StructureSpawnData"] = field(
+    structure: list[StructureSpawnData] = field(
         default_factory=list,
         metadata={
             "name": "Structure",
@@ -14425,7 +14802,7 @@ class SpawnData(DataCollection):
             "type": "Element",
         },
     )
-    spawn: list["SpawnData"] = field(
+    spawn: list[SpawnData] = field(
         default_factory=list,
         metadata={
             "name": "Spawn",
@@ -14840,6 +15217,13 @@ class TraderInstanceSaveData:
 
 @dataclass
 class TransactionData(DataCollection):
+    type_value: list[SlotIdReference] = field(
+        default_factory=list,
+        metadata={
+            "name": "Type",
+            "type": "Element",
+        },
+    )
     thumbnail: Optional[StringReference] = field(
         default=None,
         metadata={
@@ -14879,14 +15263,6 @@ class TransactionData(DataCollection):
         default=None,
         metadata={
             "name": "Value",
-            "type": "Attribute",
-            "required": True,
-        },
-    )
-    tier: Optional[ContactTier] = field(
-        default=None,
-        metadata={
-            "name": "Tier",
             "type": "Attribute",
             "required": True,
         },
@@ -15056,6 +15432,12 @@ class VeinGenerationData(DataCollection):
 
 
 @dataclass
+class Worlds(WorldCollection):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class ArrayOfCelestialBodyTemplate:
     celestial_body: list[CelestialBodyTemplate] = field(
         default_factory=list,
@@ -15080,11 +15462,11 @@ class ArrayOfGameAudioEvent:
 
 
 @dataclass
-class ArrayOfGeneCollectionWrapper:
-    gene_collections: list[GeneCollectionWrapper] = field(
+class ArrayOfGlobalPlantSaveData:
+    global_plant_save_data: list[GlobalPlantSaveData] = field(
         default_factory=list,
         metadata={
-            "name": "GeneCollections",
+            "name": "GlobalPlantSaveData",
             "type": "Element",
             "nillable": True,
         },
@@ -15329,7 +15711,20 @@ class CelestialBodyReference(CelestialReference):
 
 
 @dataclass
+class CelestialConstants(CelestialConstantsReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class ContactSlotData:
+    icon: Optional[SlotIcon] = field(
+        default=None,
+        metadata={
+            "name": "Icon",
+            "type": "Element",
+        },
+    )
     minimum_watts_visible: Optional[FloatRangeData] = field(
         default=None,
         metadata={
@@ -15405,14 +15800,6 @@ class ContactSlotData:
         metadata={
             "name": "Id",
             "type": "Attribute",
-        },
-    )
-    tier: Optional[ContactTier] = field(
-        default=None,
-        metadata={
-            "name": "Tier",
-            "type": "Attribute",
-            "required": True,
         },
     )
 
@@ -15620,32 +16007,6 @@ class GlobalAtmosphereData:
 
 
 @dataclass
-class GlobalPlantSaveData:
-    prefab_id: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "PrefabId",
-            "type": "Element",
-        },
-    )
-    gene_collection_wrapper: Optional[GeneCollectionWrapper] = field(
-        default=None,
-        metadata={
-            "name": "GeneCollectionWrapper",
-            "type": "Element",
-        },
-    )
-    count: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "Count",
-            "type": "Element",
-            "required": True,
-        },
-    )
-
-
-@dataclass
 class ItemModData(DynamicThingModData):
     inventory_scale: Optional[float] = field(
         default=None,
@@ -15814,6 +16175,12 @@ class PlayableAreaData(DataCollection):
 
 
 @dataclass
+class PlayableBody(PlayableBodyReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class PointOfInterest(DataCollection):
     region: Optional[Region] = field(
         default=None,
@@ -15891,6 +16258,17 @@ class RoomTypeRuleData:
         metadata={
             "name": "RoomType",
             "type": "Attribute",
+        },
+    )
+
+
+@dataclass
+class RoundRobinStartLocationData(StartLocationData):
+    start_location: list[StartLocationData] = field(
+        default_factory=list,
+        metadata={
+            "name": "StartLocation",
+            "type": "Element",
         },
     )
 
@@ -15982,14 +16360,6 @@ class StationContactData:
         metadata={
             "name": "ContactName",
             "type": "Element",
-        },
-    )
-    tier: Optional[ContactTier] = field(
-        default=None,
-        metadata={
-            "name": "Tier",
-            "type": "Element",
-            "required": True,
         },
     )
     watts_to_resolve: Optional[float] = field(
@@ -16239,14 +16609,14 @@ class ThingSpawnData:
             "type": "Element",
         },
     )
-    item: list["DynamicSpawnData"] = field(
+    item: list[DynamicSpawnData] = field(
         default_factory=list,
         metadata={
             "name": "Item",
             "type": "Element",
         },
     )
-    dynamic_thing: list["DynamicSpawnData"] = field(
+    dynamic_thing: list[DynamicSpawnData] = field(
         default_factory=list,
         metadata={
             "name": "DynamicThing",
@@ -16330,6 +16700,13 @@ class WeatherEvent(DataCollection):
             "type": "Element",
         },
     )
+    storm_effect: Optional[StormEffectData] = field(
+        default=None,
+        metadata={
+            "name": "StormEffect",
+            "type": "Element",
+        },
+    )
     fog: Optional[FogData] = field(
         default=None,
         metadata={
@@ -16386,13 +16763,6 @@ class WeatherEvent(DataCollection):
             "type": "Element",
         },
     )
-    direction: list[EnumReferenceOfStormDirection] = field(
-        default_factory=list,
-        metadata={
-            "name": "Direction",
-            "type": "Element",
-        },
-    )
     solar_storm_camera_effect: Optional[FloatReference] = field(
         default=None,
         metadata={
@@ -16436,10 +16806,10 @@ class WeatherEvent(DataCollection):
             "required": True,
         },
     )
-    flow_field: Optional[bool] = field(
+    wind_sound: Optional[bool] = field(
         default=None,
         metadata={
-            "name": "FlowField",
+            "name": "WindSound",
             "type": "Attribute",
             "required": True,
         },
@@ -16589,18 +16959,6 @@ class ArrayOfDynamicThingSaveData:
 
 
 @dataclass
-class ArrayOfGlobalPlantSaveData:
-    global_plant_save_data: list[GlobalPlantSaveData] = field(
-        default_factory=list,
-        metadata={
-            "name": "GlobalPlantSaveData",
-            "type": "Element",
-            "nillable": True,
-        },
-    )
-
-
-@dataclass
 class ArrayOfStationContactData:
     station_contact_data: list[StationContactData] = field(
         default_factory=list,
@@ -16726,6 +17084,12 @@ class CableSaveSaveData(StructureSaveData):
 
 
 @dataclass
+class CelestialBody(CelestialBodyReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class CelestialSpriteReference(CelestialBodyReference):
     material: Optional[StarData] = field(
         default=None,
@@ -16809,6 +17173,24 @@ class ConsumableSaveData(DynamicThingSaveData):
         default=None,
         metadata={
             "name": "Quantity",
+            "type": "Element",
+            "required": True,
+        },
+    )
+
+
+@dataclass
+class ContactSlot(ContactSlotData):
+    class Meta:
+        nillable = True
+
+
+@dataclass
+class CrewModuleSaveData(StructureSaveData):
+    partner_distance: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "PartnerDistance",
             "type": "Element",
             "required": True,
         },
@@ -17188,6 +17570,14 @@ class EntitySaveData(DynamicThingSaveData):
             "required": True,
         },
     )
+    respawn_stress_time: Optional[float] = field(
+        default=None,
+        metadata={
+            "name": "RespawnStressTime",
+            "type": "Element",
+            "required": True,
+        },
+    )
     movement_controller_control_mode: Optional[int] = field(
         default=None,
         metadata={
@@ -17346,6 +17736,11 @@ class GrenadeSaveData(DynamicThingSaveData):
             "required": True,
         },
     )
+
+
+@dataclass
+class ImportExportSaveData(StructureSaveData):
+    pass
 
 
 @dataclass
@@ -17561,7 +17956,7 @@ class ProgrammableChipSaveData(DynamicThingSaveData):
             "required": True,
         },
     )
-    device_lables: Optional[ArrayOfString5] = field(
+    device_lables: Optional[ArrayOfString3] = field(
         default=None,
         metadata={
             "name": "DeviceLables",
@@ -17803,6 +18198,18 @@ class RocketChuteUmbilicalMaleSaveData(StructureSaveData):
 
 
 @dataclass
+class RocketCrewUmbilicalSaveData(StructureSaveData):
+    partner_umbilical_id: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "PartnerUmbilicalId",
+            "type": "Element",
+            "required": True,
+        },
+    )
+
+
+@dataclass
 class RocketDataDownLinkSaveData(StructureSaveData):
     connected_ids: Optional[ArrayOfLong] = field(
         default=None,
@@ -18037,7 +18444,7 @@ class SpaceMapNodeData(DataCollection):
             "type": "Element",
         },
     )
-    discover: list["DiscoverSiteData"] = field(
+    discover: list[DiscoverSiteData] = field(
         default_factory=list,
         metadata={
             "name": "Discover",
@@ -18425,6 +18832,20 @@ class StationpediaPage:
             "type": "Element",
         },
     )
+    power_storage: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PowerStorage",
+            "type": "Element",
+        },
+    )
+    power_generation: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PowerGeneration",
+            "type": "Element",
+        },
+    )
     max_pressure: Optional[str] = field(
         default=None,
         metadata={
@@ -18582,7 +19003,7 @@ class StationpediaPage:
             "type": "Element",
         },
     )
-    page_custom_categories: Optional[ArrayOfString5] = field(
+    page_custom_categories: Optional[ArrayOfString3] = field(
         default=None,
         metadata={
             "name": "PageCustomCategories",
@@ -18752,6 +19173,17 @@ class StructureSpawnData(ThingSpawnData):
 
 
 @dataclass
+class TerraFormingSaveData:
+    plant_save_datas: Optional[ArrayOfGlobalPlantSaveData] = field(
+        default=None,
+        metadata={
+            "name": "PlantSaveDatas",
+            "type": "Element",
+        },
+    )
+
+
+@dataclass
 class ThingCreditCardSaveData(DynamicThingSaveData):
     currency: Optional[float] = field(
         default=None,
@@ -18759,6 +19191,32 @@ class ThingCreditCardSaveData(DynamicThingSaveData):
             "name": "Currency",
             "type": "Element",
             "required": True,
+        },
+    )
+
+
+@dataclass
+class ThingDynamicBodyBagSaveData(DynamicThingSaveData):
+    body_damage_state: Optional[DamageUpdate] = field(
+        default=None,
+        metadata={
+            "name": "BodyDamageState",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    body_cosmetic_data: Optional[PlayerCosmetics] = field(
+        default=None,
+        metadata={
+            "name": "BodyCosmeticData",
+            "type": "Element",
+        },
+    )
+    player_display_name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "PlayerDisplayName",
+            "type": "Element",
         },
     )
 
@@ -19076,6 +19534,12 @@ class BuyData(TransactionData):
 
 
 @dataclass
+class CelestialSprite(CelestialSpriteReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class ChickSaveData(EntitySaveData):
     current_growth_time: Optional[float] = field(
         default=None,
@@ -19232,13 +19696,7 @@ class CommsMotherboardSaveData(MotherboardSaveData):
 
 @dataclass
 class CryoTubeSaveData(DeviceAtmosphericSaveData):
-    steam_id: Optional[ArrayOfUnsignedLong] = field(
-        default=None,
-        metadata={
-            "name": "steamID",
-            "type": "Element",
-        },
-    )
+    pass
 
 
 @dataclass
@@ -19437,13 +19895,7 @@ class DiscoverSiteData(SpaceMapNodeActionData):
 
 @dataclass
 class DroidSleeperSaveData(DeviceAtmosphericSaveData):
-    steam_id: Optional[ArrayOfUnsignedLong] = field(
-        default=None,
-        metadata={
-            "name": "steamID",
-            "type": "Element",
-        },
-    )
+    pass
 
 
 @dataclass
@@ -19597,6 +20049,13 @@ class HumanSaveData(EntitySaveData):
             "name": "LastValidPlayablePosition",
             "type": "Element",
             "required": True,
+        },
+    )
+    start_location: Optional[StringReference] = field(
+        default=None,
+        metadata={
+            "name": "StartLocation",
+            "type": "Element",
         },
     )
 
@@ -20565,10 +21024,24 @@ class SpaceMapData(DataCollection):
             "type": "Element",
         },
     )
+    low_orbit_hub: Optional[SpaceMapNodeData] = field(
+        default=None,
+        metadata={
+            "name": "LowOrbitHub",
+            "type": "Element",
+        },
+    )
     node: list[SpaceMapNodeData] = field(
         default_factory=list,
         metadata={
             "name": "Node",
+            "type": "Element",
+        },
+    )
+    sprite: list[SpaceMapSpriteData] = field(
+        default_factory=list,
+        metadata={
+            "name": "Sprite",
             "type": "Element",
         },
     )
@@ -20717,19 +21190,297 @@ class SuitSaveData(AtmosphericItemSaveData):
 
 
 @dataclass
-class TerraFormingSaveData:
-    plant_save_datas: Optional[ArrayOfGlobalPlantSaveData] = field(
-        default=None,
-        metadata={
-            "name": "PlantSaveDatas",
-            "type": "Element",
-        },
-    )
+class WaterPurifierSaveData(DeviceAtmosphericSaveData):
+    pass
 
 
 @dataclass
-class WaterPurifierSaveData(DeviceAtmosphericSaveData):
-    pass
+class WorldData:
+    game: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Game",
+            "type": "Element",
+        },
+    )
+    game_version: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "GameVersion",
+            "type": "Element",
+        },
+    )
+    date_time: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "DateTime",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    days_past: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "DaysPast",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    world_setting: Optional[SerializedId] = field(
+        default=None,
+        metadata={
+            "name": "WorldSetting",
+            "type": "Element",
+        },
+    )
+    world_name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "WorldName",
+            "type": "Element",
+        },
+    )
+    name: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Name",
+            "type": "Element",
+        },
+    )
+    difficulty_setting: Optional[SerializedId] = field(
+        default=None,
+        metadata={
+            "name": "DifficultySetting",
+            "type": "Element",
+        },
+    )
+    start_condition: Optional[SerializedId] = field(
+        default=None,
+        metadata={
+            "name": "StartCondition",
+            "type": "Element",
+        },
+    )
+    start_location: Optional[SerializedId] = field(
+        default=None,
+        metadata={
+            "name": "StartLocation",
+            "type": "Element",
+        },
+    )
+    client_info: list[SerializedClientInfo] = field(
+        default_factory=list,
+        metadata={
+            "name": "ClientInfo",
+            "type": "Element",
+        },
+    )
+    celestial: Optional[OrbitSimulationSaveData] = field(
+        default=None,
+        metadata={
+            "name": "Celestial",
+            "type": "Element",
+        },
+    )
+    terra_forming: Optional[TerraFormingSaveData] = field(
+        default=None,
+        metadata={
+            "name": "TerraForming",
+            "type": "Element",
+        },
+    )
+    station_contacts: Optional[ArrayOfStationContactData] = field(
+        default=None,
+        metadata={
+            "name": "StationContacts",
+            "type": "Element",
+        },
+    )
+    contact_slot_save_datas: Optional[ArrayOfContactSlotSaveData] = field(
+        default=None,
+        metadata={
+            "name": "ContactSlotSaveDatas",
+            "type": "Element",
+        },
+    )
+    overall_index_of_contacts: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "OverallIndexOfContacts",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    world_seed: Optional[int] = field(
+        default=None,
+        metadata={
+            "name": "WorldSeed",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    rooms: Optional[ArrayOfRoomData] = field(
+        default=None,
+        metadata={
+            "name": "Rooms",
+            "type": "Element",
+        },
+    )
+    pipe_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "PipeNetworks",
+            "type": "Element",
+        },
+    )
+    cable_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "CableNetworks",
+            "type": "Element",
+        },
+    )
+    chute_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "ChuteNetworks",
+            "type": "Element",
+        },
+    )
+    landing_pad_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "LandingPadNetworks",
+            "type": "Element",
+        },
+    )
+    rocket_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "RocketNetworks",
+            "type": "Element",
+        },
+    )
+    robotic_arm_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "RoboticArmNetworks",
+            "type": "Element",
+        },
+    )
+    rocket_shuttle_networks: Optional[ArrayOfLong1] = field(
+        default=None,
+        metadata={
+            "name": "RocketShuttleNetworks",
+            "type": "Element",
+        },
+    )
+    all_things: Optional[ArrayOfThingSaveData] = field(
+        default=None,
+        metadata={
+            "name": "AllThings",
+            "type": "Element",
+        },
+    )
+    things: Optional[ArrayOfThingSaveData] = field(
+        default=None,
+        metadata={
+            "name": "Things",
+            "type": "Element",
+        },
+    )
+    pending_spawn_actions: Optional[ArrayOfPendingSpawnAction] = field(
+        default=None,
+        metadata={
+            "name": "PendingSpawnActions",
+            "type": "Element",
+        },
+    )
+    atmospheres: Optional[ArrayOfAtmosphereSaveData] = field(
+        default=None,
+        metadata={
+            "name": "Atmospheres",
+            "type": "Element",
+        },
+    )
+    space_map: Optional[SpaceMapSaveData] = field(
+        default=None,
+        metadata={
+            "name": "SpaceMap",
+            "type": "Element",
+        },
+    )
+    world_objectives: Optional[ArrayOfWorldObjectiveSaveData] = field(
+        default=None,
+        metadata={
+            "name": "WorldObjectives",
+            "type": "Element",
+        },
+    )
+    rockets: Optional[ArrayOfRocketSaveData] = field(
+        default=None,
+        metadata={
+            "name": "Rockets",
+            "type": "Element",
+        },
+    )
+    rocket_name_history: Optional[ArrayOfString3] = field(
+        default=None,
+        metadata={
+            "name": "RocketNameHistory",
+            "type": "Element",
+        },
+    )
+    user_interface: Optional[UserInterfaceSaveData] = field(
+        default=None,
+        metadata={
+            "name": "UserInterface",
+            "type": "Element",
+        },
+    )
+    weather_manager_data: Optional[WeatherManagerSavedData] = field(
+        default=None,
+        metadata={
+            "name": "WeatherManagerData",
+            "type": "Element",
+        },
+    )
+    origin_position: Optional[Vector3] = field(
+        default=None,
+        metadata={
+            "name": "OriginPosition",
+            "type": "Element",
+            "required": True,
+        },
+    )
+    world_log: Optional[ArrayOfChoice1] = field(
+        default=None,
+        metadata={
+            "name": "WorldLog",
+            "type": "Element",
+        },
+    )
+    planetary_atmosphere: Optional[PlanetaryAtmosphereSaveData] = field(
+        default=None,
+        metadata={
+            "name": "PlanetaryAtmosphere",
+            "type": "Element",
+        },
+    )
+    terrain_chunk_checksums: Optional[ArrayOfInt1] = field(
+        default=None,
+        metadata={
+            "name": "TerrainChunkChecksums",
+            "type": "Element",
+        },
+    )
+    id: Optional[str] = field(
+        default=None,
+        metadata={
+            "name": "Id",
+            "type": "Attribute",
+        },
+    )
 
 
 @dataclass
@@ -20778,6 +21529,12 @@ class AirContolCircuitboardSaveData(CircuitboardSaveData):
             "type": "Element",
         },
     )
+
+
+@dataclass
+class AtmosphericBody(AtmosphericBodyReference):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -21406,6 +22163,12 @@ class RocketMinerSaveData(DeviceImportExportSaveData):
 
 
 @dataclass
+class RockyBody(RockyBodyReference):
+    class Meta:
+        nillable = True
+
+
+@dataclass
 class SiloSaveData(DeviceImportExportSaveData):
     stored_items: list[DynamicThingSaveData] = field(
         default_factory=list,
@@ -21534,6 +22297,13 @@ class TerrainSettings(DataCollection):
 
 @dataclass
 class TraderData:
+    type_value: list[SlotIdReference] = field(
+        default_factory=list,
+        metadata={
+            "name": "Type",
+            "type": "Element",
+        },
+    )
     name: list[LocalizedStringReference] = field(
         default_factory=list,
         metadata={
@@ -21562,6 +22332,14 @@ class TraderData:
             "type": "Attribute",
         },
     )
+    shuttle_variant: Optional[ShuttleVariant] = field(
+        default=None,
+        metadata={
+            "name": "ShuttleVariant",
+            "type": "Attribute",
+            "required": True,
+        },
+    )
 
 
 @dataclass
@@ -21572,295 +22350,6 @@ class VendingMachineSaveData(DeviceImportExportSaveData):
             "name": "CurrentIndex",
             "type": "Element",
             "required": True,
-        },
-    )
-
-
-@dataclass
-class WorldData:
-    game: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "Game",
-            "type": "Element",
-        },
-    )
-    game_version: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "GameVersion",
-            "type": "Element",
-        },
-    )
-    date_time: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "DateTime",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    days_past: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "DaysPast",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    world_setting: Optional[SerializedId] = field(
-        default=None,
-        metadata={
-            "name": "WorldSetting",
-            "type": "Element",
-        },
-    )
-    world_name: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "WorldName",
-            "type": "Element",
-        },
-    )
-    name: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "Name",
-            "type": "Element",
-        },
-    )
-    difficulty_setting: Optional[SerializedId] = field(
-        default=None,
-        metadata={
-            "name": "DifficultySetting",
-            "type": "Element",
-        },
-    )
-    start_condition: Optional[SerializedId] = field(
-        default=None,
-        metadata={
-            "name": "StartCondition",
-            "type": "Element",
-        },
-    )
-    start_location: Optional[SerializedId] = field(
-        default=None,
-        metadata={
-            "name": "StartLocation",
-            "type": "Element",
-        },
-    )
-    celestial: Optional[OrbitSimulationSaveData] = field(
-        default=None,
-        metadata={
-            "name": "Celestial",
-            "type": "Element",
-        },
-    )
-    terra_forming: Optional[TerraFormingSaveData] = field(
-        default=None,
-        metadata={
-            "name": "TerraForming",
-            "type": "Element",
-        },
-    )
-    station_contacts: Optional[ArrayOfStationContactData] = field(
-        default=None,
-        metadata={
-            "name": "StationContacts",
-            "type": "Element",
-        },
-    )
-    contact_slot_save_datas: Optional[ArrayOfContactSlotSaveData] = field(
-        default=None,
-        metadata={
-            "name": "ContactSlotSaveDatas",
-            "type": "Element",
-        },
-    )
-    overall_index_of_contacts: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "OverallIndexOfContacts",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    world_seed: Optional[int] = field(
-        default=None,
-        metadata={
-            "name": "WorldSeed",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    rooms: Optional[ArrayOfRoomData] = field(
-        default=None,
-        metadata={
-            "name": "Rooms",
-            "type": "Element",
-        },
-    )
-    pipe_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "PipeNetworks",
-            "type": "Element",
-        },
-    )
-    cable_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "CableNetworks",
-            "type": "Element",
-        },
-    )
-    chute_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "ChuteNetworks",
-            "type": "Element",
-        },
-    )
-    landing_pad_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "LandingPadNetworks",
-            "type": "Element",
-        },
-    )
-    rocket_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "RocketNetworks",
-            "type": "Element",
-        },
-    )
-    robotic_arm_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "RoboticArmNetworks",
-            "type": "Element",
-        },
-    )
-    rocket_shuttle_networks: Optional[ArrayOfLong1] = field(
-        default=None,
-        metadata={
-            "name": "RocketShuttleNetworks",
-            "type": "Element",
-        },
-    )
-    all_things: Optional[ArrayOfThingSaveData] = field(
-        default=None,
-        metadata={
-            "name": "AllThings",
-            "type": "Element",
-        },
-    )
-    things: Optional[ArrayOfThingSaveData] = field(
-        default=None,
-        metadata={
-            "name": "Things",
-            "type": "Element",
-        },
-    )
-    pending_spawn_actions: Optional[ArrayOfPendingSpawnAction] = field(
-        default=None,
-        metadata={
-            "name": "PendingSpawnActions",
-            "type": "Element",
-        },
-    )
-    ispawn_points: Optional[ArrayOfSpawnPointSaveData] = field(
-        default=None,
-        metadata={
-            "name": "ISpawnPoints",
-            "type": "Element",
-        },
-    )
-    atmospheres: Optional[ArrayOfAtmosphereSaveData] = field(
-        default=None,
-        metadata={
-            "name": "Atmospheres",
-            "type": "Element",
-        },
-    )
-    space_map: Optional[SpaceMapSaveData] = field(
-        default=None,
-        metadata={
-            "name": "SpaceMap",
-            "type": "Element",
-        },
-    )
-    world_objectives: Optional[ArrayOfWorldObjectiveSaveData] = field(
-        default=None,
-        metadata={
-            "name": "WorldObjectives",
-            "type": "Element",
-        },
-    )
-    rockets: Optional[ArrayOfRocketSaveData] = field(
-        default=None,
-        metadata={
-            "name": "Rockets",
-            "type": "Element",
-        },
-    )
-    rocket_name_history: Optional[ArrayOfString5] = field(
-        default=None,
-        metadata={
-            "name": "RocketNameHistory",
-            "type": "Element",
-        },
-    )
-    user_interface: Optional[UserInterfaceSaveData] = field(
-        default=None,
-        metadata={
-            "name": "UserInterface",
-            "type": "Element",
-        },
-    )
-    weather_manager_data: Optional[WeatherManagerSavedData] = field(
-        default=None,
-        metadata={
-            "name": "WeatherManagerData",
-            "type": "Element",
-        },
-    )
-    origin_position: Optional[Vector3] = field(
-        default=None,
-        metadata={
-            "name": "OriginPosition",
-            "type": "Element",
-            "required": True,
-        },
-    )
-    world_log: Optional[ArrayOfChoice1] = field(
-        default=None,
-        metadata={
-            "name": "WorldLog",
-            "type": "Element",
-        },
-    )
-    planetary_atmosphere: Optional[PlanetaryAtmosphereSaveData] = field(
-        default=None,
-        metadata={
-            "name": "PlanetaryAtmosphere",
-            "type": "Element",
-        },
-    )
-    terrain_chunk_checksums: Optional[ArrayOfInt1] = field(
-        default=None,
-        metadata={
-            "name": "TerrainChunkChecksums",
-            "type": "Element",
-        },
-    )
-    id: Optional[str] = field(
-        default=None,
-        metadata={
-            "name": "Id",
-            "type": "Attribute",
         },
     )
 
@@ -21904,6 +22393,12 @@ class AdvancedComposterSaveData(DeviceInputOutputImportExportSaveData):
 @dataclass
 class CarbonSequesterSaveData(DeviceInputOutputImportExportSaveData):
     pass
+
+
+@dataclass
+class CelestialBodies(CelestialCollection):
+    class Meta:
+        nillable = True
 
 
 @dataclass
@@ -22078,6 +22573,13 @@ class WorldSettingData(DataCollection):
             "type": "Element",
         },
     )
+    random_start_location: list[RoundRobinStartLocationData] = field(
+        default_factory=list,
+        metadata={
+            "name": "RandomStartLocation",
+            "type": "Element",
+        },
+    )
     playable_area: list[PlayableAreaData] = field(
         default_factory=list,
         metadata={
@@ -22204,7 +22706,7 @@ class WorldSettingData(DataCollection):
             "required": True,
         },
     )
-    ambient_sky_color: Optional[Color] = field(
+    ambient_sky_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "AmbientSkyColor",
@@ -22212,7 +22714,7 @@ class WorldSettingData(DataCollection):
             "required": True,
         },
     )
-    ambient_equator_color: Optional[Color] = field(
+    ambient_equator_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "AmbientEquatorColor",
@@ -22220,7 +22722,7 @@ class WorldSettingData(DataCollection):
             "required": True,
         },
     )
-    ambient_ground_color: Optional[Color] = field(
+    ambient_ground_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "AmbientGroundColor",
@@ -22250,7 +22752,7 @@ class WorldSettingData(DataCollection):
             "type": "Element",
         },
     )
-    lava_color: Optional[Color] = field(
+    lava_color: Optional[Color1] = field(
         default=None,
         metadata={
             "name": "LavaColor",
@@ -22661,6 +23163,13 @@ class GameData:
         default_factory=list,
         metadata={
             "name": "StartLocation",
+            "type": "Element",
+        },
+    )
+    random_start_location: list[RoundRobinStartLocationData] = field(
+        default_factory=list,
+        metadata={
+            "name": "RandomStartLocation",
             "type": "Element",
         },
     )

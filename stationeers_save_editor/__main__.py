@@ -39,5 +39,6 @@ def move(filename: Path, x: float, y: float, z: float):
     data.move_player(x, y, z)
     data.save(data.filename.replace(".save", "_moved.save"))
 
+
 if __name__ == "__main__":
     app()
